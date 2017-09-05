@@ -3,7 +3,10 @@ package readData;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
-
+import org.json.*;
+import org.json.JSONObject;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
 
 public class AccessUrl {
     public static void main(String[] args) throws Exception {
@@ -15,10 +18,14 @@ public class AccessUrl {
         
         BufferedReader in = new BufferedReader(
         new InputStreamReader(api.openStream()));
-
         String inputLine;
         while ((inputLine = in.readLine()) != null)
-            System.out.println(inputLine);
+            System.out.println(inputLine); 
         in.close();
+        
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(inputLine);
+        JSONObject jsonobject = (JSONObject) obj;
+        String name = (String) jsonobject.get("Name");
     }
 }
