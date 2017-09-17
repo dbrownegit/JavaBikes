@@ -3,6 +3,8 @@ package readData;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
+import java.util.Scanner;
+
 import org.json.JSONObject;
 import org.json.JSONException; 
 import org.json.JSONObject; 
@@ -22,6 +24,12 @@ public class AccessUrl {
         while ((inputLine = in.readLine()) != null)
             System.out.println(inputLine); 
         in.close();
+        
+        String out = new Scanner(api.openStream(), "UTF-8").useDelimiter("\\A").next();
+        System.out.println("out" + out);
+        JSONObject station = new JSONObject(out.trim());
+        String stazione = (String) station.get("name");
+        System.out.println("stazione" + stazione);
         JSONObject json = new JSONObject(api);
         String title = (String) json.get("file");
         System.out.println("file" + title);
