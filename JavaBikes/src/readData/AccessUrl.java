@@ -3,10 +3,10 @@ package readData;
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
-import org.json.*;
 import org.json.JSONObject;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
+import org.json.JSONException; 
+import org.json.JSONObject; 
+import org.json.JSONArray; 
 
 public class AccessUrl {
     public static void main(String[] args) throws Exception {
@@ -22,10 +22,11 @@ public class AccessUrl {
         while ((inputLine = in.readLine()) != null)
             System.out.println(inputLine); 
         in.close();
-        
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse(inputLine);
-        JSONObject jsonobject = (JSONObject) obj;
-        String name = (String) jsonobject.get("Name");
+        JSONObject json = new JSONObject(api);
+        String title = (String) json.get("file");
+        System.out.println("file" + title);
+        JSONObject jsonObject = new JSONObject(api); 
+        System.out.println(jsonObject);
+
     }
 }
