@@ -33,18 +33,18 @@ public class AccessUrl {
 
     	
     	for (int i = 0; i < objz.length(); ++i) {
-    	    JSONObject bikeobj = objz.getJSONObject(i);
-    	    JSONObject locationobj = objz.getJSONObject(i).getJSONObject("position");
-    	    stationName = bikeobj.getString("name");
-    	    stationAddress = bikeobj.getString("address");
-    	    stationCapacity = bikeobj.getInt("bike_stands");
-    	    stationFreeBikes = bikeobj.getInt("available_bikes");
-    	    stationFreeStands = bikeobj.getInt("available_bike_stands");
-    	    stationLatitude = locationobj.getDouble("lat");
-    	    stationLongitude = locationobj.getDouble("lng");
-    	    lastUpdate = bikeobj.getLong("last_update");
+    	    JSONObject stationObjects = objz.getJSONObject(i);
+    	    JSONObject locationObjects = objz.getJSONObject(i).getJSONObject("position");
+    	    stationName = stationObjects.getString("name");
+    	    stationAddress = stationObjects.getString("address");
+    	    stationCapacity = stationObjects.getInt("bike_stands");
+    	    stationFreeBikes = stationObjects.getInt("available_bikes");
+    	    stationFreeStands = stationObjects.getInt("available_bike_stands");
+    	    stationLatitude = locationObjects.getDouble("lat");
+    	    stationLongitude = locationObjects.getDouble("lng");
+    	    lastUpdate = stationObjects.getLong("last_update");
         	Date lastDate = new Date(lastUpdate);
-    	    System.out.println("The station is " +  stationAddress + ". It has a capacity of " + stationCapacity + " bikes. There are " + stationFreeBikes + " available bikes and " + stationFreeStands + " free bike stands as of " + lastDate);
+    	    System.out.println("The station is " +  stationAddress + ", located at (" + stationLatitude + ", " + stationLongitude + "). It has a capacity of " + stationCapacity + " bikes. There are " + stationFreeBikes + " available bikes and " + stationFreeStands + " free bike stands as of " + lastDate);
     	    // ...
     	}
     	
