@@ -1,10 +1,16 @@
 package readData;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.net.*;
 import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class AccessUrl {
     public static void main(String[] args) throws Exception {
@@ -43,11 +49,12 @@ public class AccessUrl {
     	    stationLatitude = locationObjects.getDouble("lat");
     	    stationLongitude = locationObjects.getDouble("lng");
     	    lastUpdate = stationObjects.getLong("last_update");
-        	Date lastDate = new Date(lastUpdate);
-    	    System.out.println("The station is " +  stationAddress + ", located at (" + stationLatitude + ", " + stationLongitude + "). It has a capacity of " + stationCapacity + " bikes. There are " + stationFreeBikes + " available bikes and " + stationFreeStands + " free bike stands as of " + lastDate);
+    	    //System.out.println("The station is " +  stationAddress + ", located at (" + stationLatitude + ", " + stationLongitude + "). It has a capacity of " + stationCapacity + " bikes. There are " + stationFreeBikes + " available bikes and " + stationFreeStands + " free bike stands as of " + lastDate);
     	    // ...
+        	//System.out.println("[" + stationLongitude + "," + stationLatitude + "]" );
     	}
-    	
-
+    	createDatabase.createNewDatabase("test.db");
     }
+    
+
 }
