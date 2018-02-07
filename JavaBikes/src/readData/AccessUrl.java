@@ -37,24 +37,44 @@ public class AccessUrl {
     	int stationFreeStands;
     	long lastUpdate;
 
+    	connect();
     	
     	for (int i = 0; i < objz.length(); ++i) {
     	    JSONObject stationObjects = objz.getJSONObject(i);
     	    JSONObject locationObjects = objz.getJSONObject(i).getJSONObject("position");
+    	    StationId = stationObjects.getInt("number");
     	    stationName = stationObjects.getString("name");
     	    stationAddress = stationObjects.getString("address");
-    	    stationCapacity = stationObjects.getInt("bike_stands");
-    	    stationFreeBikes = stationObjects.getInt("available_bikes");
-    	    stationFreeStands = stationObjects.getInt("available_bike_stands");
     	    stationLatitude = locationObjects.getDouble("lat");
     	    stationLongitude = locationObjects.getDouble("lng");
+    	    stationBanking = stationObjects.getBoolean("bonus");
+    	    stationStatus = stationObjects.getString("status");
+    	    stationCapacity = stationObjects.getInt("bike_stands");
+    	    stationFreeStands = stationObjects.getInt("available_bike_stands");
+    	    stationFreeBikes = stationObjects.getInt("available_bikes");
     	    lastUpdate = stationObjects.getLong("last_update");
     	    //System.out.println("The station is " +  stationAddress + ", located at (" + stationLatitude + ", " + stationLongitude + "). It has a capacity of " + stationCapacity + " bikes. There are " + stationFreeBikes + " available bikes and " + stationFreeStands + " free bike stands as of " + lastDate);
     	    // ...
         	//System.out.println("[" + stationLongitude + "," + stationLatitude + "]" );
+    	    String sql = "INSERT INTO dublinbikes(address,available_bike_stands,available_bikes,"
+    	    		+ "banking,bike_stands,bonus,contract_name,last_update,name,number,position,status,update_time,update_date) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     	}
-    	createDatabase.createNewDatabase("test.db");
+    	    	
+       
     }
+    
+    private static Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:C://sqlite/db/tests.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }
+    
     
 
 }

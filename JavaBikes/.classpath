@@ -2,7 +2,11 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/David/Downloads/java-json.jar/java-json.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Downloads/json-simple-1.1.jar/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Downloads/json-simple-1.1.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/User/Downloads/java-json.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/User/Downloads/java-json.jar/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Downloads/gson-master.zip"/>
+	<classpathentry kind="lib" path="C:/Users/User/Downloads/google-gson-stream-2.2.1.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/User/Downloads/sqlite-jdbc-3.21.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
