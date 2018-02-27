@@ -11,10 +11,9 @@ public class createDatabase {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//createNewDatabase("test.db");
+		createNewDatabase("tests.db");
 		createNewTable();
-		createDatabase app = new createDatabase();
-		app.insert("Templeogue");
+		//createDatabase app = new createDatabase();
 	}
 
 	
@@ -52,20 +51,20 @@ public class createDatabase {
 		        + "	number integer,\n"	
 	            + "	position real,\n"	
 			    + "	status text,\n"	
-		        + "	update_time integer,\n"	
-		        + "	update_date integer\n"	
+		        + "	update_time timestamp\n"		
                 + ");";
         
         try (Connection conn = DriverManager.getConnection(url);
                 Statement stmt = conn.createStatement()) {
-            // create a new table
+        	System.out.println("About to execute statement " + sql);
             stmt.execute(sql);
+            System.out.println("Executed");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     
-    private Connection connect() {
+    private static Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:C://sqlite/db/tests.db";
         Connection conn = null;
@@ -76,17 +75,6 @@ public class createDatabase {
         }
         return conn;
     }
-    
-    public void insert(String name) {
-        String sql = "INSERT INTO dublinbikes(address) VALUES(?)";
- 
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+
     
 }

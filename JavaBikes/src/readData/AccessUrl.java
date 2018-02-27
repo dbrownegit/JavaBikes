@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 
 public class AccessUrl {
     public static void main(String[] args) throws Exception {
@@ -78,6 +79,8 @@ public class AccessUrl {
        		pstmt.setLong(14,lastUpdate);
     		pstmt.executeUpdate();
     	}
+
+		System.out.println("Dublin Bikes Web Scrape Complete at: " + LocalDateTime.now());
     	    	
        
     }
