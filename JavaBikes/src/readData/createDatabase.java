@@ -51,7 +51,8 @@ public class createDatabase {
 		        + "	number integer,\n"	
 	            + "	position real,\n"	
 			    + "	status text,\n"	
-		        + "	update_time timestamp\n"		
+		        + "	update_time timestamp,\n"	
+		        + "	audit_time datetime\n"	
                 + ");";
         
         try (Connection conn = DriverManager.getConnection(url);

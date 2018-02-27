@@ -40,6 +40,7 @@ public class AccessUrl {
     	int stationFreeBikes;
     	int stationFreeStands;
     	long lastUpdate;
+
     	
 
     	String url = "jdbc:sqlite:C://sqlite/db/tests.db";
@@ -61,6 +62,7 @@ public class AccessUrl {
     	    stationFreeStands = stationObjects.getInt("available_bike_stands");
     	    stationFreeBikes = stationObjects.getInt("available_bikes");
     	    lastUpdate = stationObjects.getLong("last_update");
+    	    java.sql.Timestamp currentTime = new java.sql.Timestamp(new java.util.Date().getTime());
     	    String sql = "INSERT INTO dublinbikes VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     		PreparedStatement pstmt = c.prepareStatement(sql);
     		pstmt.setString(1, stationAddress );
@@ -76,7 +78,7 @@ public class AccessUrl {
        		pstmt.setDouble(11,stationLatitude);
        		pstmt.setString(12,stationStatus);
        		pstmt.setLong(13,lastUpdate);
-       		pstmt.setLong(14,lastUpdate);
+       		pstmt.setTimestamp(14, currentTime);
     		pstmt.executeUpdate();
     	}
 
