@@ -1,19 +1,18 @@
 package readData;
 
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.net.*;
 import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 
 public class AccessUrl {
     public static void main(String[] args) throws Exception {
@@ -62,7 +61,11 @@ public class AccessUrl {
     	    stationFreeStands = stationObjects.getInt("available_bike_stands");
     	    stationFreeBikes = stationObjects.getInt("available_bikes");
     	    lastUpdate = stationObjects.getLong("last_update");
-    	    java.sql.Timestamp currentTime = new java.sql.Timestamp(new java.util.Date().getTime());
+    	    Timestamp scrapeTimestamp = new Timestamp(System.currentTimeMillis());
+    	    Timestamp bikeTimestamp = new Timestamp(lastUpdate);
+    	    SimpleDateFormat dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z"); 
+    	    String webScrapeTime = dateTime.format(scrapeTimestamp);
+    	    String bikeScrapeTime = dateTime.format(bikeTimestamp);
     	    String sql = "INSERT INTO dublinbikes VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     		PreparedStatement pstmt = c.prepareStatement(sql);
     		pstmt.setString(1, stationAddress );
@@ -77,8 +80,8 @@ public class AccessUrl {
        		pstmt.setInt(10,StationId);
        		pstmt.setDouble(11,stationLatitude);
        		pstmt.setString(12,stationStatus);
-       		pstmt.setLong(13,lastUpdate);
-       		pstmt.setTimestamp(14, currentTime);
+       		pstmt.setString(13,bikeScrapeTime);
+       		pstmt.setString(14, webScrapeTime);
     		pstmt.executeUpdate();
     	}
 
