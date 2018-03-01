@@ -1,7 +1,9 @@
 package readData;
 
 import java.net.*;
-import java.util.Date;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -16,6 +18,7 @@ import java.text.SimpleDateFormat;
 
 public class AccessUrl {
     public static void main(String[] args) throws Exception {
+
 
     	String root = "https://api.jcdecaux.com/vls/v1/stations?contract="; //base url
         String city = "Dublin"; //enter city here
@@ -39,12 +42,19 @@ public class AccessUrl {
     	int stationFreeBikes;
     	int stationFreeStands;
     	long lastUpdate;
-
+    	boolean jobRunning = true;
     	
 
     	String url = "jdbc:sqlite:C://sqlite/db/tests.db";
     	Connection c=(Connection) DriverManager.getConnection(url);	
     	Statement s=c.createStatement();
+    	if(c.isClosed()) {
+    		jobRunning = false;
+    	}
+    	System.out.println("Job running? " + jobRunning);
+    	while(jobRunning) {
+    		
+    	
     	for (int i = 0; i < objz.length(); ++i) {
     	    JSONObject stationObjects = objz.getJSONObject(i);
     	    JSONObject locationObjects = objz.getJSONObject(i).getJSONObject("position");
@@ -86,10 +96,11 @@ public class AccessUrl {
     	}
 
 		System.out.println("Dublin Bikes Web Scrape Complete at: " + LocalDateTime.now());
-    	    	
-       
+		Thread.sleep(300000);
+    	}
     }
     
+
     private static Connection connect() {
         // SQLite connection string
         String url = "jdbc:sqlite:C://sqlite/db/tests.db";
@@ -104,6 +115,7 @@ public class AccessUrl {
         return conn;
         
     }
+
     
     
 
